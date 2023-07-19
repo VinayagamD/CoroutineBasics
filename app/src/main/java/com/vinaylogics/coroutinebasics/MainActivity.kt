@@ -25,12 +25,6 @@ class MainActivity : ComponentActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GlobalScope.launch {
-            delay(3.seconds)
-            Log.d(TAG, "Coroutine says hello from thread ${Thread.currentThread().name}")
-        }
-
-        Log.d(TAG, "Hello from thread ${Thread.currentThread().name}")
 
 
         setContent {
@@ -44,7 +38,24 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        GlobalScope.launch {
+            delay(1.seconds)
+            val networkCallAnswer = doNetworkCall()
+            val networkCallAnswer2 = doNetworkCall2()
+            Log.d(TAG, networkCallAnswer)
+            Log.d(TAG, networkCallAnswer2)
+        }
     }
+}
+
+suspend fun doNetworkCall(): String{
+    delay(3.seconds)
+    return "This is the answer"
+}
+suspend fun doNetworkCall2(): String{
+    delay(3.seconds)
+    return "This is the answer"
 }
 
 @Composable
