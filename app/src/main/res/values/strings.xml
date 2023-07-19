@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoroutineBasics</string>
+    <string name="dummy">Dummy</string>
 </resources>
